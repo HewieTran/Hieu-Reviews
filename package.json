@@ -1,0 +1,19 @@
+{
+  "name": "hieu-reviews",
+  "version": "1.0.0",
+  "description": "personal movie blog to discover movies reviewed by Hieu",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HewieTran/Hieu-Reviews.git"
+  },
+  "author": "Hieu Tran",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HewieTran/Hieu-Reviews/issues"
+  },
+  "homepage": "https://github.com/HewieTran/Hieu-Reviews#readme"
+}
