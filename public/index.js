@@ -49,8 +49,7 @@ submitButton.addEventListener('click', async () => {
 });
 
 searchBar.addEventListener('keydown', async event => {
-    console.log('hi');
-
+    
     if (event.keyCode === 13) {
         query = searchBar.value;
 
@@ -214,3 +213,6 @@ function numPages() {
             // `;
 
             // searchResults.insertAdjacentHTML('beforeend', markup);
+
+// Extra details of movies:
+// https://api.themoviedb.org/3/movie/29536?api_key=3f2b4d11eb5ac29ac5a7f77d75117192
