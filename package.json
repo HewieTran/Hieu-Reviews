@@ -19,6 +19,7 @@
   "homepage": "https://github.com/HewieTran/Hieu-Reviews#readme",
   "dependencies": {
     "ejs": "^2.6.1",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "mongoose": "^5.4.17"
   }
 }
