@@ -85,7 +85,7 @@ searchBar.addEventListener('keydown', async event => {
 // Pagination
 let currentPage = 1;
 const end = 0;
-const resultsPerPage = 6;
+const resultsPerPage = 4;
 
 paginationCss.style.visibility = 'hidden';
 
@@ -130,10 +130,10 @@ function renderPage(currentPage) {
             </div>
             <div class="movie-body">
             <div class="movie-title">${state.search.results[i].title}</div>
-            <div class="movie-overview">${newOverview} ...</div>
+            <div class="movie-overview">${newOverview} ...<a id="${state.search.results[i].id}" href="/movie">Read More</a> </div>
             <div class="movie-vote-average">Vote Average: ${state.search.results[i].vote_average}</div>
             <div class="movie-vote-count">Vote Count: ${state.search.results[i].vote_count}</div>
-            <div class="review"><a href="#">Check Out Hieu's Review</a></div>
+            <div class="review"><a href="/movie">Check Out Hieu's Review</a></div>
             </div>
         </div>
         `;
