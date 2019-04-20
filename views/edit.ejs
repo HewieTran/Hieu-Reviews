@@ -1,0 +1,59 @@
+<% include partials/header %>
+
+<main>
+    <section id="section-a" class="grid">
+        <div class="content-wrap">
+            <form action="/reviews/<%= review._id %>?_method=PUT" method="POST">
+
+
+                <div class="new-review-entry">
+                    <div class="new-review-entry-1">
+                        <div>
+                            <div class="field-header">Title</div>
+                            <div><input class="field" type="text" name="review[title]" value="<%= review.title %>"></div>
+                        </div>
+                        <div>
+                            <div class="field-header">Poster</div>
+                            <div><input class="field" type="text" name="review[poster]" value="<%= review.poster %>"></div>
+                        </div>
+                        <div>
+                            <div class="field-header">Wide Poster</div>
+                            <div><input class="field" type="text" name="review[posterFull]" value="<%= review.posterFull %>"></div>
+                        </div>
+                        <div>
+                            <div class="field-header">Release Date</div>
+                            <div><input class="field" type="text" name="review[releaseDate]" value="<%= review.releaseDate %>"></div>
+                        </div>
+                        <div>
+                            <div class="field-header">Directed By</div>
+                            <div><input class="field" type="text" name="review[directedBy]" value="<%= review.directedBy %>"></div>
+                        </div>
+                        <div>
+                            <div class="field-header">Cinematography By</div>
+                            <div><input class="field" type="text" name="review[cinematographyBy]" value="<%= review.cinematographyBy %>"></div>
+                        </div>
+                        <div>
+                            <div class="field-header">Budget</div>
+                            <div><input class="field" type="text" name="review[budget]" value="<%= review.budget %>"></div>
+                        </div>
+                        <div>
+                            <div class="field-header">Box Office</div>
+                            <div><input class="field" type="text" name="review[boxOffice]" value="<%= review.boxOffice %>"></div>
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <div class="field-header">Review</div>
+                        <div><textarea class="field-reviewContent" type="text" name="review[reviewContent]"><%= review.reviewContent %></textarea></div>
+                    </div>
+                    <div>
+                        <button>submit</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+
+<% include partials/footer %>
