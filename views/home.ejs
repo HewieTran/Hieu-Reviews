@@ -26,8 +26,22 @@
 						<div></div>
 						<div id="nav-link">
 							<a class="nav-link-a" href="/">Home</a>
-							<a class="nav-link-a" href="/Reviews">Reviews</a>
+							<a class="nav-link-a" href="/reviews/1">Reviews</a>
 							<a class="nav-link-a" href="/Contact">Contact Me</a>
+
+							<a id="nav-burger" href="#" onclick="openSlideMenu()">
+                                <svg width="30" height="30">
+                                    <path d="M0,5 30,5" stroke="#fff" stroke-width="5" />
+                                    <path d="M0,14 30,14" stroke="#fff" stroke-width="5" />
+                                    <path d="M0,23 30,23" stroke="#fff" stroke-width="5" />
+                                </svg>
+                            </a>
+						</div>
+						<div id="side-menu" class="side-nav">
+							<a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
+							<a href="/">Home</a>
+							<a href="/reviews/1">Reviews</a>
+							<a href="/contact">Contact</a>
 						</div>
 					</div>
 				</div>
@@ -66,7 +80,7 @@
 	</header>
 
 	<!-- MAIN -->
-	<main>
+	<main class="home">
 		<section id="section-a-header" class="grid">
 			<div class="content-wrap header-text">
 				<h2>RECENT REVIEWS</h2>
@@ -77,51 +91,28 @@
 
 			<div class="content-wrap">
 				<div class="reviews-grid">
-					<div class="card shadow">
-						<img src="https://i.ibb.co/r5MLCR9/Captain-Marvel-800x400.png" alt="">
-						<div class="card-content">
-							<div class="movie-title">
-								<h3>CAPTAIN MARVEL</h3>
-							</div>
-							<div class="movie-review">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-								Sapiente, enim. Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-								Sapiente, enim. Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-								Sapiente, enim.</div>
-							<button><a href="/reviews/<%= %>">Read More</a> </button>
-						</div>
-					</div>
 
-					<div class="card shadow">
-						<img src="https://i.ibb.co/s9Qx3WV/Hereditary-800x400.png" alt="">
-						<div class="card-content">
-							<div class="movie-title">
-								<h3>HEREDITARY</h3>
-							</div>
-							<div class="movie-review">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-								Sapiente, enim.Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-								Sapiente, enim.Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-								Sapiente, enim.iente, eni. Ipsum dolor sit amet consectetur adipisicing elit.
-								Sapiente, enim.iente, eni</div>
-							<button><a href="/reviews/<%= %>">Read More</a> </button>
-						</div>
-					</div>
 
-					<div class="card shadow">
-						<img src="https://i.ibb.co/88XTcHH/A-Star-Is-Born-800x400.png" alt="">
-						<div class="card-content">
-							<div class="movie-title">
-								<h3>A Star Is Born</h3>
-							</div>
-							<div class="movie-review">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-								Sapiente, enim.Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-								Sapiente, enim.Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-								Sapiente, enim.</div>
-							<button><a href="/reviews/<%= %>">Read More</a> </button>
-						</div>
-					</div>
+                <% reviews.forEach(review => { %>
+                <div class="card shadow">
+                    <img src="<%= review.poster %>" alt="">
+                    <div class="card-content">
+                        <div class="movie-title">
+                            <h3><%= review.title %></h3>
+                        </div>
+                        <div class="movie-review"> <%= review.reviewContent.split(' ').slice(0, 35).join(' ') %> ...
+                        </div>
+                        <a href="/reviews/r/<%= review._id %>"><button>Read More</button></a>
+                    </div>
+                </div>
+                <% }) %>
+
+
+
 				</div>
 			</div>
 		</section>
+
 
 		<section id="section-a-footer" class="grid">
 			<div class="content-wrap header-text">
@@ -129,7 +120,7 @@
 					<div>
 					</div>
 					<div>
-						<a href="/reviews">
+						<a href="/reviews/1">
 							<h2>SEE MORE REVIEWS</h2>
 						</a>
 					</div>

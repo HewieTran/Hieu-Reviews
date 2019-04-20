@@ -4,9 +4,9 @@
         <div class="content-wrap">
             <div id="reviews-id-masthead">
                 <div id="reviews-id-masthead-img">
-                    <img src="/images/Movie-poster/posterFull/Whiplash-full.png" alt="">
+                    <img src="<%= foundReview.posterFull %>" alt="">
                 </div>
-                <div id="reviews-id-title">WHIPLASH</div>
+                <div id="reviews-id-title"><%= foundReview.title %></div>
             </div>
         </div>
     </section>
@@ -16,48 +16,35 @@
             <div class="reviews-id-grid">
                 <div>
                     <div class="reviews-id-content">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porttitor mauris eget urna
-                        aliquam, eget facilisis lacus lacinia. Sed maximus risus ac diam lacinia congue non vitae
-                        sapien. Vestibulum ut facilisis erat. Curabitur pretium eros ut sem fringilla, faucibus varius
-                        felis pellentesque. Maecenas dictum malesuada condimentum. Curabitur sed viverra massa,
-                        porttitor luctus ex. Morbi nec luctus dui. Morbi condimentum enim massa, at porttitor turpis
-                        viverra ac. Maecenas sed enim pellentesque, egestas tortor et, porttitor augue. Nam felis massa,
-                        consequat sit amet iaculis et, tincidunt eget velit. Donec lobortis tempus odio, at placerat est
-                        vestibulum vel. Nam fermentum odio laoreet egestas consequat. Proin eros metus, sollicitudin non
-                        consectetur id, cursus vestibulum eros. Nulla venenatis, purus quis luctus ultricies, ipsum nibh
-                        gravida velit, in ullamcorper justo erat in magna. Duis quis velit accumsan, gravida enim et,
-                        consequat risus.
-                        <br>
-                        Suspendisse sit amet dictum nunc. Cras mi justo, suscipit vitae nisi id, imperdiet porttitor mi.
-                        Nullam a finibus mi. Aliquam eu ultricies velit. Praesent turpis orci, interdum vitae hendrerit
-                        nec, lacinia eu nunc. Quisque tincidunt nisl a lacus scelerisque tincidunt. Maecenas scelerisque
-                        justo ac malesuada ornare.
-                        <br>
-                        Nulla gravida, felis nec pretium rhoncus, ante augue dapibus lacus, eget tristique enim purus
-                        vel nibh. Praesent sapien ligula, porta convallis orci at, euismod elementum diam. Nullam
-                        luctus, tortor in mattis commodo, enim nibh convallis nibh, quis suscipit ante nunc sit amet
-                        dui. Donec lacinia, turpis a luctus tempus, massa tellus imperdiet augue, nec posuere est augue
-                        eu est. Vivamus fringilla id risus in tristique. Pellentesque eleifend et neque sed fringilla.
-                        Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean a tempor mi.
+                        <%= foundReview.reviewContent %>
                     </div>
+                    
+                    <form method="POST" action="/reviews/r/<%= foundReview._id %>?_method=DELETE">    
+                        <button class="edit"><a href="/reviews/r/<%= foundReview._id%>/edit">EDIT</a></button>
+                        <button class="delete" type="submit"><a >DELETE</a></button>
+                    </form>
                 </div>
                 <div class="reviews-id-side-content">
                     <div>
                         <div class="reviews-id-side">
                             <div class="reviews-id-side-content-head">Release Date</div>
-                            <div>January 1st, 2015</div>
+                            <div> <%= foundReview.releaseDate %></div>
                         </div>
                         <div class="reviews-id-side">
                             <div class="reviews-id-side-content-head">Directed By</div>
-                            <div>Someone Else</div>
+                            <div><%= foundReview.directedBy %></div>
+                        </div>
+                        <div class="reviews-id-side">
+                            <div class="reviews-id-side-content-head">Cinematography By</div>
+                            <div><%= foundReview.cinematographyBy %></div>
                         </div>
                         <div class="reviews-id-side">
                             <div class="reviews-id-side-content-head">Budget</div>
-                            <div>4 million USD</div>
+                            <div><%=  foundReview.budget %></div>
                         </div>
                         <div class="reviews-id-side">
                             <div class="reviews-id-side-content-head">Box Office</div>
-                            <div>50 milion USD</div>
+                            <div><%=  foundReview.boxOffice %></div>
                         </div>
                     </div>
                 </div>

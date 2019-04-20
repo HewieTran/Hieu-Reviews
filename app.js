@@ -1,67 +1,151 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
+const ejsLint = require('ejs-lint');
 
-mongoose.connect('mongodb://localhost/Hieu-Reviews',{ useNewUrlParser: true });
-
+mongoose.connect('mongodb://localhost/hieu-reviews', { useNewUrlParser: true });
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
+app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/public'));
 
 const reviewSchema = new mongoose.Schema({
     title: String,
-    overview: String,
-    voteAverage: Number,
-    voteCount: Number,
-    id: Number,
     poster: String,
-    hieusReview: String
+    posterFull: String,
+    releaseDate: String,
+    directedBy: String,
+    cinematographyBy: String,
+    budget: String,
+    boxOffice: String,
+    reviewContent: String
 });
 
 const reviews = mongoose.model('review', reviewSchema);
 
-// CREATE A MOVIE AND STORE IN MONGODB
-// reviews.create(
-//     {
-//         title: 'Iron Man',
-//         overview: "Seasoned musician Jackson Maine discovers — and falls in love with — struggling artist Ally. She has just about given up on her dream to make it big as a singer — until Jack coaxes her into the spotlight. But even as Ally's career takes off, the personal side of their relationship is breaking down, as Jack fights an ongoing battle with his own internal demons.",
-//         voteAverage: 7.5,
-//         voteCount: 4316,
-//         id: 332562,
-//         hieusReview: 'The first 30 minutes of this movie (when lady Gaga performed shallow for the first time) was perfect yo, 10/10. The rest of the movie after that felt off, the pacing was definitely the problem. It\'s like drinking a cold one on a hot day in the back seat, and then the car start hitting bumps on the road for the rest of the ride.'
-//     },
-//     (err, review) => {
-//         if(err) {
-//             console.log(err)
-//         } else {
-//             console.log(review);
-//         }
-//     }
-// );
-
-// reviews.deleteOne({title: 'Iron Man'}, err => {
-//     if (err) return handleError(err);
-//   });
-
-
 var port = process.env.PORT || 3000;
 
-app.set('view engine', 'ejs');
-app.use(express.static(__dirname + '/public'));
 
-// HOMEPAGE - LANDING PAGE
+// HOME.EJS
+app.get('/', (req, res) => {
+    reviews.find().sort({datefield: -1}).limit(3).exec((err, allReviews) => {
+        res.render('home', {
+            reviews: allReviews
+        })
+    }) 
+});
+
 app.get('/', (req, res) => {
     res.render('home')
 });
 
-// REVIEWS PAGE
-app.get('/reviews', (req, res) => {
-    res.render('reviews')
-    // reviews.find({}, (err, allReviews) => {
-    //     if(err) {
-    //         console.log(err)
-    //     } else {
-    //         res.render('showMovie', {reviews: allReviews})
-    //         // console.log(allReviews);
-    //     }
-    // })
+// REVIEWS.EJS
+
+app.get('/reviews/:currentPage', (req, res, next) => {
+    let currentPage = req.params.currentPage || 1;
+    let resPerPage = 6;
+
+
+    reviews.find({}).skip((resPerPage * currentPage) - resPerPage).limit(resPerPage).exec((err, allReviews) => {
+        reviews.countDocuments().exec((err, count) => {
+            if (err) { return next(err) }
+
+            res.render('reviews', {
+                reviews: allReviews,
+                currentPage: currentPage,
+                totalPages: Math.ceil(count / resPerPage)
+            })
+        })
+    })
+});
+
+
+
+// POST ROUTE
+app.post('/reviews', (req, res) => {
+    // get data from form and add to reviews collection
+    const title = req.body.title;
+    const poster = req.body.poster;
+    const posterFull = req.body.posterFull;
+    const releaseDate = req.body.releaseDate;
+    const directedBy = req.body.directedBy;
+    const cinematographyBy = req.body.cinematographyBy;
+    const budget = req.body.budget;
+    const boxOffice = req.body.boxOffice;
+    const reviewContent = req.body.reviewContent;
+    const newReview = {
+        title: title,
+        poster: poster,
+        posterFull: posterFull,
+        releaseDate: releaseDate,
+        directedBy: directedBy,
+        cinematographyBy: cinematographyBy,
+        budget: budget,
+        boxOffice: boxOffice,
+        reviewContent: reviewContent,
+    }
+
+    // create new review and save to DB
+    reviews.create(newReview, (err, newlyCreated) => {
+        console.log(newlyCreated);
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect('/reviews/1');
+        }
+    })
+})
+
+// NEW.EJS
+app.get('/reviews/r/new', (req, res) => {
+    res.render('new');
+})
+
+// SHOW.EJS
+app.get('/reviews/r/:id', (req, res) => {
+    reviews.findById(req.params.id, (err, foundReview) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.render('show', { foundReview: foundReview })
+        }
+    })
+})
+
+// EDIT.EJS
+app.get('/reviews/r/:id/edit', (req, res) => {
+    reviews.findById(req.params.id, (err, foundReview) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.render('edit', { review: foundReview });
+        }
+    })
+})
+
+// UPDATE ROUTE
+app.put('/reviews/:id', (req, res) => {
+    reviews.findByIdAndUpdate(req.params.id, req.body.review, (err, updatedReview) => {
+        if (err) {
+            res.redirect('/reviews');
+            console.log(err);
+        } else {
+            res.redirect('/reviews/r/' + req.params.id);
+        }
+    })
+})
+
+// DESTROY ROUTE
+app.delete('/reviews/r/:id', (req, res) => {
+    reviews.findByIdAndDelete(req.params.id, (err) => {
+        if (err) {
+            res.redirect('/reviews/1');
+        } else {
+            res.redirect('/reviews/1');
+        }
+    })
 });
 
 // CONTACT ME
@@ -69,26 +153,7 @@ app.get('/contact', (req, res) => {
     res.render('contact');
 });
 
-app.get('/reviews/:id', (req, res) => {
-    
-    res.render('show');
-});
 
-
-
-// ///////////////////////////////////////////
-
-// const data = [
-//     {title: 'movie1', overview: 'ipsum lorem'},
-//     {title: 'movie2', overview: 'ipsum lorem'},
-// ];
-    
-
-
-// // TEST
-// app.get('/test', (req, res) => {
-//     res.render('showMovie', {testData: data})
-// });
 
 app.listen(port, () => {
     console.log('Hieu-Reviews is running!')
