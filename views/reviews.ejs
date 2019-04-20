@@ -1,96 +1,64 @@
 <% include partials/header %>
 
 <main>
+    <section id="section-a-header" class="grid">
+        <div class="content-wrap header-text">
+                <a href="/reviews/r/new"><button class="createNewReview">CREATE NEW REVIEW</button></a>
+        </div>
+    </section>
+
     <section id="section-a" class="grid">
 
         <div class="content-wrap">
             <div class="reviews-grid">
 
+                <% reviews.forEach(review => { %>
                 <div class="card shadow">
-                    <img src="https://i.ibb.co/r5MLCR9/Captain-Marvel-800x400.png" alt="">
+                    <img src="<%= review.poster %>" alt="">
                     <div class="card-content">
                         <div class="movie-title">
-                            <h3>CAPTAIN MARVEL</h3>
+                            <h3><%= review.title %></h3>
                         </div>
-                        <div class="movie-review">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                            Sapiente, enim. Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                            Sapiente, enim. Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                            Sapiente, enim.</div>
-                            <button><a href="/reviews/<%= %>">Read More</a></button>
+                        <div class="movie-review"> <%= review.reviewContent.split(' ').slice(0, 35).join(' ') %> ...
+                        </div>
+                        <a href="/reviews/r/<%= review._id %>"><button>Read More</button></a>
                     </div>
                 </div>
-
-                <div class="card shadow">
-                    <img src="https://i.ibb.co/s9Qx3WV/Hereditary-800x400.png" alt="">
-                    <div class="card-content">
-                        <div class="movie-title">
-                            <h3>HEREDITARY</h3>
-                        </div>
-                        <div class="movie-review">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                            Sapiente, enim.Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                            Sapiente, enim.Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                            Sapiente, enim.iente, eni. Ipsum dolor sit amet consectetur adipisicing elit.
-                            Sapiente, enim.iente, eni</div>
-                            <button><a href="/reviews/<%= %>">Read More</a></button>
-                    </div>
-                </div>
-
-                <div class="card shadow">
-                    <img src="https://i.ibb.co/88XTcHH/A-Star-Is-Born-800x400.png" alt="">
-                    <div class="card-content">
-                        <div class="movie-title">
-                            <h3>A Star Is Born</h3>
-                        </div>
-                        <div class="movie-review">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                            Sapiente, enim.Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                            Sapiente, enim.Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                            Sapiente, enim.</div>
-                        <button><a href="/reviews/<%= %>">Read More</a></button>
-                    </div>
-                </div>
-                <div class="card shadow">
-                    <img src="https://i.ibb.co/r5MLCR9/Captain-Marvel-800x400.png" alt="">
-                    <div class="card-content">
-                        <div class="movie-title">
-                            <h3>CAPTAIN MARVEL</h3>
-                        </div>
-                        <div class="movie-review">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                            Sapiente, enim. Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                            Sapiente, enim. Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                            Sapiente, enim.</div>
-                            <button><a href="/reviews/<%= %>">Read More</a></button>
-                    </div>
-                </div>
-
-                <div class="card shadow">
-                    <img src="https://i.ibb.co/s9Qx3WV/Hereditary-800x400.png" alt="">
-                    <div class="card-content">
-                        <div class="movie-title">
-                            <h3>HEREDITARY</h3>
-                        </div>
-                        <div class="movie-review">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                            Sapiente, enim.Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                            Sapiente, enim.Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                            Sapiente, enim.iente, eni. Ipsum dolor sit amet consectetur adipisicing elit.
-                            Sapiente, enim.iente, eni</div>
-                            <button><a href="/reviews/<%= %>">Read More</a></button>
-                    </div>
-                </div>
-
-                <div class="card shadow">
-                    <img src="https://i.ibb.co/88XTcHH/A-Star-Is-Born-800x400.png" alt="">
-                    <div class="card-content">
-                        <div class="movie-title">
-                            <h3>A Star Is Born</h3>
-                        </div>
-                        <div class="movie-review">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                            Sapiente, enim.Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                            Sapiente, enim.Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                            Sapiente, enim.</div>
-                            <button><a href="/reviews/<%= %>">Read More</a></button>
-                    </div>
-                </div>
+                <% }) %>
             </div>
+        </div>
+    </section>
+
+    <section id="section-a-footer" class="grid">
+        <div class="content-wrap header-text">
+            <div id="section-a-footer-grid-1">
+                <% if (totalPages > 0) { %>
+                    <% if (Number(currentPage) === 1) { %>
+                        <a href="/reviews/1"><button id="next-btn" style="display:none">First</button></a>
+                    <% } else { %>
+                        <a href="/reviews/1"><button id="next-btn">First</button></a>
+                    <% } %>
+
+
+                    <% var i = (Number(currentPage) > 5 ? Number(currentPage) - 4 : 1) %>
+                    
+                    <% for (i <= (Number(currentPage) + 3); i <= totalPages; i++) { %>
+                        <% if (i === Number(currentPage)) { %>
+                        <button id="next-btn" class="active"><%= i %></button>
+                        <% } else { %>
+                            <a href="/reviews/<%= i %>"><button id="next-btn"><%= i %></button></a>
+                        <% } %>
+                    <% } %>
+
+                    <% if (Number(currentPage) === totalPages) { %>
+                        <button id="next-btn" class="active" style="display:none"><%= i %></button>
+                    <% } else { %>
+                        <a class="cursor-pointer" href="/reviews/<%= totalPages %>"><button id="next-btn">Last</button></a>
+                    <% } %>
+                    
+                <% } %>
+            </div>
+
         </div>
     </section>
 </main>
