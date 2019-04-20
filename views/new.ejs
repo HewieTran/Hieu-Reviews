@@ -1,0 +1,70 @@
+<% include partials/header %>
+
+<main>
+    <section id="section-a-header" class="grid">
+        <div class="content-wrap header-text">
+            <h2><a href="/reviews/1"> <\Back to Reviews</a> </h2>
+        </div>
+    </section>
+
+    <section id="section-a" class="grid">
+        <div class="content-wrap">
+            <form action="/reviews" method="POST">
+
+
+                <div class="new-review-entry">
+                    <div class="new-review-entry-1">
+                        <div>
+                            <div class="field-header">Title</div>
+                            <div><input class="field" type="text" name="title">
+                            </div>
+                        </div>
+                        <div>
+                            <div class="field-header">Poster</div>
+                            <div><input class="field" type="text" name="poster">
+                            </div>
+                        </div>
+                        <div>
+                            <div class="field-header">Wide Poster</div>
+                            <div><input class="field" type="text" name="posterFull"></div>
+                        </div>
+                        <div>
+                            <div class="field-header">Release Date</div>
+                            <div><input class="field" type="text" name="releaseDate"></div>
+                        </div>
+                        <div>
+                            <div class="field-header">Directed By</div>
+                            <div><input class="field" type="text" name="directedBy"></div>
+                        </div>
+                        <div>
+                            <div class="field-header">Cinematography By</div>
+                            <div><input class="field" type="text" name="cinematographyBy"></div>
+                        </div>
+                        <div>
+                            <div class="field-header">Budget</div>
+                            <div><input class="field" type="text" name="budget">
+                            </div>
+                        </div>
+                        <div>
+                            <div class="field-header">Box Office</div>
+                            <div><input class="field" type="text" name="boxOffice"></div>
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <div class="field-header">Review</div>
+                        <div><textarea class="field-reviewContent" type="text" name="reviewContent"></textarea>
+                        </div>
+                    </div>
+                    <div>
+                        <button>submit</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+
+
+<% include partials/footer %>
