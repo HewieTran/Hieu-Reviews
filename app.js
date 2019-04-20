@@ -6,7 +6,11 @@ const methodOverride = require('method-override');
 const ejsLint = require('ejs-lint');
 
 // mongoose.connect('mongodb://localhost/hieu-reviews', { useNewUrlParser: true });
-mongoose.connect('mongodb+srv://tranhieu07:Lyco2015!@hieu-reviews-atlas-cluster-d1jyv.mongodb.net/test?retryWrites=true', { useNewUrlParser: true });
+mongoose.connect('mongodb+srv://tranhieu07:Lyco2015!@hieu-reviews-atlas-cluster-d1jyv.mongodb.net/test?retryWrites=true', { useNewUrlParser: true }).then(() => {
+    console.log('Connected to Database');
+}).catch((err) => {
+    console.log('Not Connected to Database ERROR!', err);
+});
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.set('view engine', 'ejs');
