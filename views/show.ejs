@@ -20,8 +20,8 @@
                     </div>
                     
                     <form method="POST" action="/reviews/r/<%= foundReview._id %>?_method=DELETE">    
-                        <button class="edit"><a href="/reviews/r/<%= foundReview._id%>/edit">EDIT</a></button>
-                        <button class="delete" type="submit"><a >DELETE</a></button>
+                        <a href="/reviews/r/<%= foundReview._id%>/edit"><button class="edit">EDIT</button></a>
+                        <a href="/reviews/1"><button class="delete" type="submit">DELETE</button></a>
                     </form>
                 </div>
                 <div class="reviews-id-side-content">

@@ -285,11 +285,11 @@ button a:hover {
 /*  Reviews-id PAGE */
 
 #reviews-id-masthead {
-    background-color: #01D277;
+    background-color: rgb(37, 37, 37);
 }
 
 #reviews-id-masthead-img img{
-    background-color: #01D277;
+    background-color: rgb(37, 37, 37);
 }
 
 #reviews-id-masthead {
@@ -305,11 +305,12 @@ button a:hover {
     color: black;
     display: grid;
     grid-template-columns: 4fr 1fr;
-    grid-gap: 2em;
+    grid-gap: 1em;
 }
 
 .reviews-id-content {
     padding-top: 1em;
+
 }
 
 .reviews-id-side {
@@ -428,6 +429,7 @@ textarea {
     #nav {
         display: flex;
         justify-content: flex-end;
+        align-self: center;
         margin-bottom: 0em;
     }
     
@@ -626,17 +628,37 @@ textarea {
         transition:0.3s;
       }
       
-      .side-nav a:hover{
+    .side-nav a:hover{
         color:#fff;
         transition: 0.2s;
       }
 
-      .side-nav .btn-close{
+    .side-nav .btn-close{
         position:absolute;
         top:0;
         right:22px;
         font-size:36px;
         margin-left:50px;
       }
+
+    .reviews-id-content {
+        padding-left: 1em;
+    }
+
+    #nav {
+        display: flex;
+        justify-content: flex-end;
+        align-self: center;
+        margin-bottom: 0em;
+      }
+
+      .contact-me-grid {
+          display: grid;
+          grid-gap: 1em;
+      }
+
+      .contact-me-box2 {
+        color: black;
+    }
 
 }
