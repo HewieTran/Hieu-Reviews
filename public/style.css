@@ -393,16 +393,11 @@ textarea {
 
 .contact-me-grid {
     display: grid;
-    grid-gap: 1em;
 }
 
 .profile-pic {
     width: 250px;
     height: 250px;
-}
-
-.contact-me-box2 {
-    color: black;
 }
 
 /* Media Queries //////////////////////////////////////////////////////// */
