@@ -6,7 +6,7 @@ const methodOverride = require('method-override');
 const ejsLint = require('ejs-lint');
 
 // mongoose.connect('mongodb://localhost/hieu-reviews', { useNewUrlParser: true });
-mongoose.connect('mongodb+srv://tranhieu07:Lyco2015!@hieu-reviews-atlas-cluster-d1jyv.mongodb.net/test?retryWrites=true', { useNewUrlParser: true }).then(() => {
+mongoose.connect('mongodb+srv://tranhieu07:Lyco2015!@hieu-reviews-atlas-cluster-d1jyv.mongodb.net/hieu-reviews?retryWrites=true', { useNewUrlParser: true }).then(() => {
     console.log('Connected to Database');
 }).catch((err) => {
     console.log('Not Connected to Database ERROR!', err);
@@ -34,17 +34,58 @@ var port = process.env.PORT || 3000;
 
 
 // HOME.EJS
+
+
+
 app.get('/', (req, res) => {
-    reviews.find().sort({datefield: -1}).limit(3).exec((err, allReviews) => {
+    reviews.find().sort({ datefield: -1 }).limit(4).exec((err, allReviews) => {
         res.render('home', {
             reviews: allReviews
         })
-    }) 
+    });
 });
 
-app.get('/', (req, res) => {
-    res.render('home')
-});
+// app.get('/', (req, res) => {
+//     reviews.find().sort({ datefield: -1 }).limit(1).exec((err, featuredReview) => {
+//         res.render('home', {
+//             featured: featuredReview
+//         })
+//     })
+// });
+
+// var collection = db.collection('photographers');
+
+// collection.find({}).toArray(function (err, result) {
+//     var finalResult = {};
+
+//     if (err) {
+//         console.log("Error retrieving records");
+//         res.send(err);
+//     } else if (result.length) {
+//         console.log("Success");
+//         finalResult.plist = result;
+//         collection.find({/* another query */ }).toArray(function (err, result) {
+//             finalResult.anotherKey = result;
+//             res.render('ptlist', {
+//                 "ptlist": finalResult
+//             });
+//         });
+//     } else {
+//         res.send('No Documents');
+//     }
+//     db.close();
+// });
+
+// app.get('/', (req, res) => {
+//     reviews.find().sort({datefield: -1}).limit(1).exec((err, featuredReview) => {
+//         res.render('home', {
+//             featured: featuredReview
+//         })
+// });
+
+// app.get('/', (req, res) => {
+//     res.render('home')
+// });
 
 // REVIEWS.EJS
 

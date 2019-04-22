@@ -14,7 +14,7 @@
 
                 <% reviews.forEach(review => { %>
                 <div class="card shadow">
-                    <img src="<%= review.poster %>" alt="">
+                        <a href="/reviews/r/<%= review._id %>"><img src="<%= review.poster %>" alt=""></a>
                     <div class="card-content">
                         <div class="movie-title">
                             <h3><%= review.title %></h3>
@@ -38,7 +38,6 @@
                     <% } else { %>
                         <a href="/reviews/1"><button id="next-btn">First</button></a>
                     <% } %>
-
 
                     <% var i = (Number(currentPage) > 5 ? Number(currentPage) - 4 : 1) %>
                     

@@ -7,6 +7,7 @@
 	<title>Home Page</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" media="screen" href="/style.css">
+	<link rel="shortcut icon" type="image/png" href="https://i.ibb.co/Y79B8CG/Favicon-Logo-Transparent.png">
 	<script src="main.js"></script>
 </head>
 
@@ -57,21 +58,17 @@
 					<h2 class="header-text">FEATURED REVIEW</h2>
 					<div id="featured-box">
 						<div id="featured-poster">
-							<img src="https://i.ibb.co/0qmJS4S/Shazam-1000x500.png" alt="">
+							<img src="<%= reviews[0].poster %>" alt="">
 						</div>
 						<div id="review-content">
 							<div id="featured-title">
-								<h1>SHAZAM (2019)</h1>
+								
+									<h1><%= reviews[0].title %></h1>
+									
 							</div>
-							<div id="featured-review">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio ad
-								fuga
-								incidunt obcaecati nemo? Libero.Lorem ipsum dolor sit amet, consectetur adipisicing
-								elit. Odio ad fuga
-								incidunt obcaecati nemo? Libero.Lorem ipsum dolor sit amet, consectetur adipisicing
-								elit. Odio ad fuga
-								incidunt obcaecati nemo? Libero.</div>
+							<div id="featured-review"><%= reviews[0].reviewContent.split(' ').slice(0, 120).join(' ') %> ...</div>
 
-							<button><a href="/reviews/<%= %>">Read More</a> </button>
+							<a href="/reviews/r/<%= reviews[0]._id %>"><button>Read More</button></a>
 						</div>
 					</div>
 				</div>
@@ -92,10 +89,10 @@
 			<div class="content-wrap">
 				<div class="reviews-grid">
 
-
-                <% reviews.forEach(review => { %>
+				<% const recentReviews =reviews.slice(1) %>
+                <% recentReviews.forEach(review => { %>
                 <div class="card shadow">
-                    <img src="<%= review.poster %>" alt="">
+						<a href="/reviews/r/<%= review._id %>"><img src="<%= review.poster %>" alt=""></a>
                     <div class="card-content">
                         <div class="movie-title">
                             <h3><%= review.title %></h3>

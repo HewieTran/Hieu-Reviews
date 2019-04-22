@@ -1,10 +1,17 @@
 <% include partials/header %>
 
 <main>
+        <section id="section-a-header" class="grid">
+                <div class="content-wrap header-text">
+                    <h2><a href="/reviews/r/<%= review._id %>"> <\Back to <%= review.title %></a> </h2>
+                </div>
+            </section>
+
     <section id="section-a" class="grid">
         <div class="content-wrap">
             <form action="/reviews/<%= review._id %>?_method=PUT" method="POST">
 
+                
 
                 <div class="new-review-entry">
                     <div class="new-review-entry-1">
