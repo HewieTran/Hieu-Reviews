@@ -35,10 +35,8 @@ var port = process.env.PORT || 3000;
 
 // HOME.EJS
 
-
-
 app.get('/', (req, res) => {
-    reviews.find().sort({ datefield: -1 }).limit(4).exec((err, allReviews) => {
+    reviews.find().sort({ datefield: 1 }).limit(4).exec((err, allReviews) => {
         res.render('home', {
             reviews: allReviews
         })
@@ -107,7 +105,7 @@ app.get('/reviews/:currentPage', (req, res, next) => {
     })
 });
 
-
+let content = '';
 
 // POST ROUTE
 app.post('/reviews', (req, res) => {
@@ -140,9 +138,18 @@ app.post('/reviews', (req, res) => {
             console.log(err);
         } else {
             res.redirect('/reviews/1');
+            // console.log('new review posted.')
         }
     })
 })
+
+
+// const newReviewBtn = document.querySelector('.new-review-btn');
+
+// newReviewBtn.addEventListener('click', () => {
+//     content = quill.getContents();
+// });
+
 
 // NEW.EJS
 app.get('/reviews/r/new', (req, res) => {
@@ -179,6 +186,7 @@ app.put('/reviews/:id', (req, res) => {
             console.log(err);
         } else {
             res.redirect('/reviews/r/' + req.params.id);
+            // console.log('done.')
         }
     })
 })

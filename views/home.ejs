@@ -31,12 +31,12 @@
 							<a class="nav-link-a" href="/Contact">Contact Me</a>
 
 							<a id="nav-burger" href="#" onclick="openSlideMenu()">
-                                <svg width="30" height="30">
-                                    <path d="M0,5 30,5" stroke="#fff" stroke-width="5" />
-                                    <path d="M0,14 30,14" stroke="#fff" stroke-width="5" />
-                                    <path d="M0,23 30,23" stroke="#fff" stroke-width="5" />
-                                </svg>
-                            </a>
+								<svg width="30" height="30">
+									<path d="M0,5 30,5" stroke="#fff" stroke-width="5" />
+									<path d="M0,14 30,14" stroke="#fff" stroke-width="5" />
+									<path d="M0,23 30,23" stroke="#fff" stroke-width="5" />
+								</svg>
+							</a>
 						</div>
 						<div id="side-menu" class="side-nav">
 							<a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
@@ -62,11 +62,12 @@
 						</div>
 						<div id="review-content">
 							<div id="featured-title">
-								
-									<h1><%= reviews[0].title %></h1>
-									
+
+								<h1><%= reviews[0].title %></h1>
+
 							</div>
-							<div id="featured-review"><%= reviews[0].reviewContent.split(' ').slice(0, 120).join(' ') %> ...</div>
+							<div id="featured-review"><%- reviews[0].reviewContent.split(' ').slice(0, 93).join(' ') %>
+								...</div>
 
 							<a href="/reviews/r/<%= reviews[0]._id %>"><button>Read More</button></a>
 						</div>
@@ -85,27 +86,29 @@
 		</section>
 
 		<section id="section-a" class="grid">
-
 			<div class="content-wrap">
 				<div class="reviews-grid">
-
-				<% const recentReviews =reviews.slice(1) %>
-                <% recentReviews.forEach(review => { %>
-                <div class="card shadow">
+					<% const recentReviews = reviews.slice(1) %>
+					<% recentReviews.forEach(review => { %>
+					<div class="card shadow">
+						<!-- a -->
 						<a href="/reviews/r/<%= review._id %>"><img src="<%= review.poster %>" alt=""></a>
-                    <div class="card-content">
-                        <div class="movie-title">
-                            <h3><%= review.title %></h3>
-                        </div>
-                        <div class="movie-review"> <%= review.reviewContent.split(' ').slice(0, 35).join(' ') %> ...
+						<div class="card-content">
+							<div class="movie-title">
+								<h3><%= review.title %></h3>
+							</div>
+							<div class="movie-review">
+								<% if (review.reviewContent) { %>
+								<%- review.reviewContent.split(' ').slice(0, 35).join(' ') %> ...
+								<%} else {%>
+								N/A
+								<%}%> 
                         </div>
                         <a href="/reviews/r/<%= review._id %>"><button>Read More</button></a>
-                    </div>
-                </div>
-                <% }) %>
-
-
-
+							</div>
+						</div>
+					</div>
+					<% }) %>
 				</div>
 			</div>
 		</section>
@@ -122,9 +125,9 @@
 						</a>
 					</div>
 				</div>
-
 			</div>
 		</section>
+
 
 		<section id="section-b" class="grid"></section>
 	</main>
