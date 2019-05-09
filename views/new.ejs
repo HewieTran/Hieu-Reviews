@@ -11,18 +11,15 @@
         <div class="content-wrap">
             <form action="/reviews" method="POST">
 
-
                 <div class="new-review-entry">
                     <div class="new-review-entry-1">
                         <div>
                             <div class="field-header">Title</div>
-                            <div><input class="field" type="text" name="title">
-                            </div>
+                            <div><input class="field" type="text" name="title"></div>
                         </div>
                         <div>
                             <div class="field-header">Poster</div>
-                            <div><input class="field" type="text" name="poster">
-                            </div>
+                            <div><input class="field" type="text" name="poster"></div>
                         </div>
                         <div>
                             <div class="field-header">Wide Poster</div>
@@ -42,8 +39,7 @@
                         </div>
                         <div>
                             <div class="field-header">Budget</div>
-                            <div><input class="field" type="text" name="budget">
-                            </div>
+                            <div><input class="field" type="text" name="budget"></div>
                         </div>
                         <div>
                             <div class="field-header">Box Office</div>
@@ -53,11 +49,13 @@
 
                     <div class="">
                         <div class="field-header">Review</div>
-                        <div><textarea class="field-reviewContent" type="text" name="reviewContent"></textarea>
-                        </div>
+                        <!-- <div><textarea id="editor" class="field-reviewContent" type="text" name="reviewContent"></textarea>
+                        </div> -->
+                        <input type="hidden" name="reviewContent">
+                        <div id="editor" class="field-reviewContent"></div>
                     </div>
                     <div>
-                        <button>submit</button>
+                        <button class="new-review-btn">Submit</button>
                     </div>
 
                 </div>
@@ -66,5 +64,6 @@
     </section>
 </main>
 
+<script type="text/javascript" src="/newReview.js"></script>
 
 <% include partials/footer %>

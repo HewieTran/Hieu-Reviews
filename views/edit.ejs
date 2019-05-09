@@ -51,10 +51,12 @@
 
                     <div class="">
                         <div class="field-header">Review</div>
-                        <div><textarea class="field-reviewContent" type="text" name="review[reviewContent]"><%= review.reviewContent %></textarea></div>
+                        <!-- <div><textarea class="field-reviewContent" type="text" name="review[reviewContent]"><%= review.reviewContent %></textarea></div> -->
+                        <input type="hidden" name="review[reviewContent]">
+                        <div id="editor" class="field-reviewContent"><%- review.reviewContent %></div>
                     </div>
                     <div>
-                        <button>submit</button>
+                        <button class="update-review-btn">Submit</button>
                     </div>
 
                 </div>
@@ -62,5 +64,7 @@
         </div>
     </section>
 </main>
+
+<script type="text/javascript" src="/editReview.js"></script>
 
 <% include partials/footer %>

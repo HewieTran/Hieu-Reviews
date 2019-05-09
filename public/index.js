@@ -3,7 +3,7 @@ const sideMenu = document.getElementById('side-menu');
 
 function openSlideMenu() {
     sideMenu.style.width = '250px';
-    
+
 };
 
 function closeSlideMenu() {
@@ -11,5 +11,10 @@ function closeSlideMenu() {
     // document.getElementById('main').style.marginLeft = '0';
 };
 
+
+// Add Quill WYSIWYG
+var quill = new Quill('#editor', {
+    theme: 'snow'
+});
 
 
