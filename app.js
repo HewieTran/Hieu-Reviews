@@ -35,8 +35,16 @@ var port = process.env.PORT || 3000;
 
 // HOME.EJS
 
+// app.get('/', (req, res) => {
+//     reviews.find().limit(4).sort({ datefield: -1 }, (err, featuredReview) => {
+//         res.render('home', {
+//             reviews: allReviews
+//         })
+//     })
+// });
+
 app.get('/', (req, res) => {
-    reviews.find().sort({ datefield: 1 }).limit(4).exec((err, allReviews) => {
+    reviews.find().sort( [['_id', -1]] ).limit(4).exec((err, allReviews) => {
         res.render('home', {
             reviews: allReviews
         })
@@ -92,7 +100,7 @@ app.get('/reviews/:currentPage', (req, res, next) => {
     let resPerPage = 6;
 
 
-    reviews.find({}).skip((resPerPage * currentPage) - resPerPage).limit(resPerPage).exec((err, allReviews) => {
+    reviews.find({}).sort( [['_id', -1]] ).skip((resPerPage * currentPage) - resPerPage).limit(resPerPage).exec((err, allReviews) => {
         reviews.countDocuments().exec((err, count) => {
             if (err) { return next(err) }
 

@@ -372,12 +372,16 @@ button a:hover {
     height: 200px;
 }
 
+.ql-toolbar.ql-snow + .ql-container.ql-snow {
+    height: 300px;
+}
+
 input {
     width: 95%;
     padding: 4px;
     -webkit-appearance: none; 
     -moz-appearance: none; 
-    border: 2px solid rgb(182, 182, 182);
+    border: 1px solid rgb(182, 182, 182);
     height: 1.5em;
 }
 
@@ -563,7 +567,7 @@ textarea {
         display: grid;
         /* grid-template-columns: repeat(auto-fill, minmax(450px,1fr)); */
         color: black;
-        grid-gap: 0.5em;
+        grid-gap: 2em;
     }
 
     .new-review-entry-1 {
@@ -573,7 +577,7 @@ textarea {
     }
 
     .field {
-        width: 100%;
+        width: 98%;
     }
     
     .field-reviewContent {
@@ -671,3 +675,4 @@ textarea {
     display: flex;
     
 }
+
