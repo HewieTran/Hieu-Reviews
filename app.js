@@ -34,15 +34,6 @@ var port = process.env.PORT || 3000;
 
 
 // HOME.EJS
-
-// app.get('/', (req, res) => {
-//     reviews.find().limit(4).sort({ datefield: -1 }, (err, featuredReview) => {
-//         res.render('home', {
-//             reviews: allReviews
-//         })
-//     })
-// });
-
 app.get('/', (req, res) => {
     reviews.find().sort( [['_id', -1]] ).limit(4).exec((err, allReviews) => {
         res.render('home', {
@@ -51,56 +42,14 @@ app.get('/', (req, res) => {
     });
 });
 
-// app.get('/', (req, res) => {
-//     reviews.find().sort({ datefield: -1 }).limit(1).exec((err, featuredReview) => {
-//         res.render('home', {
-//             featured: featuredReview
-//         })
-//     })
-// });
-
-// var collection = db.collection('photographers');
-
-// collection.find({}).toArray(function (err, result) {
-//     var finalResult = {};
-
-//     if (err) {
-//         console.log("Error retrieving records");
-//         res.send(err);
-//     } else if (result.length) {
-//         console.log("Success");
-//         finalResult.plist = result;
-//         collection.find({/* another query */ }).toArray(function (err, result) {
-//             finalResult.anotherKey = result;
-//             res.render('ptlist', {
-//                 "ptlist": finalResult
-//             });
-//         });
-//     } else {
-//         res.send('No Documents');
-//     }
-//     db.close();
-// });
-
-// app.get('/', (req, res) => {
-//     reviews.find().sort({datefield: -1}).limit(1).exec((err, featuredReview) => {
-//         res.render('home', {
-//             featured: featuredReview
-//         })
-// });
-
-// app.get('/', (req, res) => {
-//     res.render('home')
-// });
 
 // REVIEWS.EJS
-
 app.get('/reviews/:currentPage', (req, res, next) => {
     let currentPage = req.params.currentPage || 1;
     let resPerPage = 6;
 
 
-    reviews.find({}).sort( [['_id', -1]] ).skip((resPerPage * currentPage) - resPerPage).limit(resPerPage).exec((err, allReviews) => {
+    reviews.find().sort( [['_id', -1]] ).skip((resPerPage * currentPage) - resPerPage).limit(resPerPage).exec((err, allReviews) => {
         reviews.countDocuments().exec((err, count) => {
             if (err) { return next(err) }
 
